@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import * as CryptoJS from "crypto-js";
+import { SpinnerItem } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -35,4 +36,9 @@ export function getContrastYIQ(hexColor: string): string {
 
 export function lerp(a: number, b: number, t: number): number {
   return a * (1 - t) + b * t;
+}
+
+export function SELECT_RANDOM_ITEM(items: SpinnerItem[]) {
+  const randomIndex = Math.floor(Math.random() * items.length);
+  return items[randomIndex];
 }

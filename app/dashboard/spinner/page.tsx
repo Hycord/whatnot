@@ -8,7 +8,7 @@ import Spinner from "@/lib/components/custom/games/spinner/Spinner";
 import { HistoryColumns, ItemColumns } from "@/lib/components/custom/tables/spinner/history/Columns";
 import { DataTable } from "@/lib/components/custom/tables/spinner/history/DataTable";
 import { useSocket } from "@/lib/contexts/SocketContext";
-import { cn } from "@/lib/utils";
+import { cn, SELECT_RANDOM_ITEM } from "@/lib/utils";
 import { PlayIcon, RotateCw, Shuffle, StopCircle, Trash } from "lucide-react";
 import { ReactNode } from "react";
 
@@ -28,9 +28,8 @@ export default function Page() {
                 <Button className="aspect-square h-fit" onClick={
                     () => {
                         // pick an item, remove it from list, add it to history
-                        const item = data.games.spinner.items[
-                            Math.floor(Math.random() * data.games.spinner.items.length)
-                        ];
+                        const item = SELECT_RANDOM_ITEM(data.games.spinner.items);
+                        
                         setData(d => ({
                             ...d, games: {
                                 ...d.games, spinner: {
