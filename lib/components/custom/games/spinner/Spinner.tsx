@@ -60,7 +60,7 @@ export default function Spinner({
             ctx.fillStyle = color;
             ctx.fill();
             ctx.strokeStyle = "black";
-            ctx.stroke();
+            // ctx.stroke();
 
             // Label
             const labelAngle = startRadian + sliceRadians / 2;
@@ -70,9 +70,9 @@ export default function Spinner({
 
             ctx.save();
             ctx.translate(labelX, labelY);
-            ctx.rotate(labelAngle);
+            ctx.rotate(labelAngle + Math.PI);
             ctx.font = `${radius / 14}px Arial`;
-            ctx.textAlign = "end";
+            ctx.textAlign = "start";
             ctx.textBaseline = "middle";
             ctx.fillStyle = getContrastYIQ(stringToColor(item.id));
             ctx.fillText(item.name.substring(0, 15), 0, 0);
@@ -103,12 +103,8 @@ export default function Spinner({
         const latestHistory = data.games.spinner.history[0];
         if (latestHistory.time <= lastRotation) return; // Avoid repeating same spin
 
-        if (lastRotation == -1) {
-            setLastRotation(latestHistory.time); // Update last processed spin time
-
-            return
-        }
         setLastRotation(latestHistory.time); // Update last processed spin time
+        setZoom(1);
 
         // Find the corresponding item
         const itemIndex = data.games.spinner.items.findIndex((i) => i.id === latestHistory.item.id);
@@ -143,7 +139,7 @@ export default function Spinner({
                 setTimeout(() => {
                     // animate zoom back to 1
                     setZoom(1);
-                }, 3000);
+                }, 5000);
             }
         };
 
