@@ -49,12 +49,7 @@ export default function DashboardLayout({
                             onClick={() => {
                                 router.push(href);
                                 setData(d => ({
-                                    ...d, admin: { ...d.admin, activeGame: label }, games: {
-                                        ...d.games,
-                                        spinner: label == "spinner" ? { ...d.games.spinner, active: false } : d.games.spinner,
-                                        battleship: label == "battleship" ? { ...d.games.battleship, active: false } : d.games.battleship,
-
-                                    }
+                                    ...d, admin: { ...d.admin, activeGame: label, active: false },
                                 }));
                             }}
                             key={index}
